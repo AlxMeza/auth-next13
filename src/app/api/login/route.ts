@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 import { pool } from '../../../services/db'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { serialize } from 'cookie'
+// import { serialize } from 'cookie'
 
 export async function POST(request: Request) {
     const user:any = await request.json()
@@ -18,15 +18,24 @@ export async function POST(request: Request) {
                 name: userDB.name 
             }, `${process.env.SECRET_KEY}`)
 
-            const serialized = serialize('token', token, {
+            // const serialized = serialize('auth', token, {
+            //     httpOnly: true,
+            //     secure: process.env.NODE_ENV === 'production',
+            //     sameSite: 'strict',
+            //     maxAge: 1000 * 60 * 60 * 24 * 30,
+            //     path: '/'
+            // })
+            const date = new Date()
+
+            cookies().set({
+                name: 'auth',
+                value: token,
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
                 sameSite: 'strict',
-                maxAge: 1000 * 60 * 60 * 24 * 30,
+                expires: date.setDate(date.getDate() + 30),
+                secure: process.env.NODE_ENV === 'production',
                 path: '/'
             })
-
-            cookies().set('mytoken', serialized)
             return NextResponse.json({message: 'success'})
         }
         return NextResponse.json({message: 'email or password incorrect'}, {status: 401})

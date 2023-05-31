@@ -35,13 +35,13 @@ export default function Login (){
                     <div className="mb-10 relative">
                         <input type="password" id='password' placeholder="password" className="pl-4 text-black bg-neutral-100 py-1 rounded-lg focus:outline-none 
                         w-full focus:ring-4 focus:ring-indigo-500" required/>
-                        <span className="text-gray-800 absolute inset-y-0 right-0 pr-4 flex items-center text-sm leading-5"><button 
+                        <span className="text-gray-800 absolute inset-y-0 right-0 pr-4 flex items-center text-sm leading-5"><p 
                         className="focus:outline-none focus:text-indigo-500 focus:underline decoration-indigo-500 border rounded-lg" onClick={(e) => {
                             e.preventDefault()
                             let element:any = document.getElementById('password')
                             status === 'show' ? setStatus('hidden') : setStatus('show')
-                            status === 'show' || element.value === '' ? element.type = 'text' : element.type = 'password' 
-                        }}>{status}</button></span>
+                            status === 'show' ? element.type = 'text' : element.type = 'password' 
+                        }}>{status}</p></span>
                     </div>
                     <button className="border border-indigo-500 py-1 text-lg w-full rounded-lg bg-indigo-500 hover:bg-indigo-600 mb-10 focus:outline-none
                     focus:ring focus:ring-indigo-400">Send</button>

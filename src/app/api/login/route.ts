@@ -18,15 +18,7 @@ export async function POST(request: Request) {
                 name: userDB.name 
             }, `${process.env.SECRET_KEY}`)
 
-            // const serialized = serialize('auth', token, {
-            //     httpOnly: true,
-            //     secure: process.env.NODE_ENV === 'production',
-            //     sameSite: 'strict',
-            //     maxAge: 1000 * 60 * 60 * 24 * 30,
-            //     path: '/'
-            // })
             const date = new Date()
-
             cookies().set({
                 name: 'auth',
                 value: token,

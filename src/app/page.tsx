@@ -11,7 +11,6 @@ export default function Dashboard () {
             .then(res => res.json())
             .then(result => {
                 result.message === 'success' ? setData(result.data) : alert('Data not found')
-                console.log(result.data)
             })
     }, [])
 

@@ -2,6 +2,7 @@
 import Image from "next/image"
 import { useState } from "react"
 import { useRouter } from 'next/navigation'
+import { ToastContainer, toast } from "react-toastify"
 
 export default function Login (){
     const [ status, setStatus ] = useState('show')
@@ -19,12 +20,26 @@ export default function Login (){
         .then(result => {
             email.value = ''
             password.value = ''
-            result.message === 'success' ? router.push('/') : alert(result.message)
+            result.message === 'success' ? router.push('/') : notify(result.message)
+        })
+    }
+
+    const notify = ( message: string ) => {
+        toast(`🦄 | ${message}`, { 
+            position: "top-center", 
+            autoClose: 5000, 
+            hideProgressBar: false, 
+            closeOnClick: true,  
+            pauseOnHover: true, 
+            draggable: true, 
+            progress: undefined, theme: "dark" 
         })
     }
 
     return(
         <>
+            <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={true} closeOnClick rtl={false} pauseOnFocusLoss draggable
+                pauseOnHover theme="dark" />
             <main className="grid md:grid-cols-2 grid-cols-1 gap-4 px-10 py-10 min-h-screen">
                 <form onSubmit={handlerSubmit} className="px-10 py-10 md:w-3/4 mx-auto w-full border dark:border-gray-600 rounded-lg border-gray-300 place-self-center">
                     <h2 className="text-center my-10 text-2xl font-semibold">Welcome!</h2>
